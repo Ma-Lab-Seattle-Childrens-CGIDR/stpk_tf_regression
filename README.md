@@ -24,40 +24,25 @@ repressors by Ser/Thr phosphorylation"
 
 ## Directory Structure
 
-<details>
-<summary>Descriptions of the files in this repository</summary>
-<details>
-<summary>data/</summary>
-
-- Mycobacterium_tuberculosis_H37Rv_txt_v5.txt: Gene information for _Mtb_ from
-  [Mycobrowser](https://mycobrowser.epfl.ch/), see [reference](#references)
-  below.
-- bosch_vulnerability_index.xlsx: Gene essentiality and vulnerability
-  information from (Bosch et al., 2021)
-- tfoe_targets.xlsx: Targets of the _Mtb_ transcription factors from (Rustad et
-  al., 2014)
-
-</details>
-<details>
-<summary>results/</summary>
-
-- phosphosite_linear_regression_results.csv: All transcription factor
-  phosphosite predictions
-- visualization: Directory of heatmap visualizations of the transcription factor
-  phosphosite activity predictions, named according to the gene name of the
-  transcription factor (or locus tag if no gene name has been assigned)
-
-</details>
-<details>
-<summary>scripts/</summary>
-
-- 01_kinase_tf_phosphosite_regression.py: Script for fitting the linear models
-- 02_kinase_tf_phosphosite_visualization.py: Script for generating the heatmap
-  visualizations for the transcription factor phosphosite activity predictions
-- common_functions.py: Some utility functions used by the scripts
-
-</details>
-
+- data: Input data to the analysis
+  - Mycobacterium_tuberculosis_H37Rv_txt_v5.txt: Gene information for _Mtb_ from
+    [Mycobrowser](https://mycobrowser.epfl.ch/), see [reference](#references)
+    below.
+  - bosch_vulnerability_index.xlsx: Gene essentiality and vulnerability
+    information from (Bosch et al., 2021)
+  - tfoe_targets.xlsx: Targets of the _Mtb_ transcription factors from (Rustad
+    et al., 2014)
+- results: Results of the analysis
+  - phosphosite_linear_regression_results.csv: All transcription factor
+    phosphosite predictions
+  - visualization: Directory of heatmap visualizations of the transcription
+    factor phosphosite activity predictions, named according to the gene name of
+    the transcription factor (or locus tag if no gene name has been assigned)
+- scripts: Scripts for performing the analysis, and some helper functions
+  - 01_kinase_tf_phosphosite_regression.py: Script for fitting the linear models
+  - 02_kinase_tf_phosphosite_visualization.py: Script for generating the heatmap
+    visualizations for the transcription factor phosphosite activity predictions
+  - common_functions.py: Some utility functions used by the scripts
 - environment.yml: Conda environment specification
 - LICENSE: License for reusing the code in this repository (does NOT apply to
   external data in data directory, see [licensing](#licensing) for details)
