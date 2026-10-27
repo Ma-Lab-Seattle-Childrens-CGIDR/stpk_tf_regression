@@ -14,3 +14,10 @@ dependencies = [
     "seaborn>=0.13.2",
     "statsmodels>=0.15.0",
 ]
+
+[dependency-groups]
+dev = [
+    "mdformat>=1.0.0",
+    "ruff>=0.17.3",
+    "ty>=0.0.92",
+]
