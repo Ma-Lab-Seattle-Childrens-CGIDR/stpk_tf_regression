@@ -1,0 +1,14 @@
+name: stpk_tf_regression
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - scipy
+  - openpyxl
+  - pandas
+  - statsmodels
+  - python
+  - matplotlib
+  - scikit-learn
+  - seaborn
+prefix: /home/bgrieb/miniforge/envs/stpk_tf_regression

@@ -1,0 +1,36 @@
+[workspace]
+authors = ["Braden Griebel <bgriebel@uw.edu>"]
+channels = ["conda-forge"]
+name = "stpk_tf_regression"
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+regression = { cmd = "python 01_kinase_tf_phosphosite_regression.py", cwd = "scripts" }
+visualization = { cmd = "python 02_kinase_tf_phosphosite_visualization.py", cwd = "scripts" }
+all = [
+  { task = "regression", environment = "default" },
+  { task = "visualization", environment = "default" },
+]
+
+
+[dependencies]
+python = ">=3.13.9,<3.14"
+statsmodels = ">=0.14.5,<0.15"
+pandas = ">=2.3.3,<3"
+scikit-learn = ">=1.7.2,<2"
+scipy = ">=1.16.3,<2"
+numpy = ">=2.3.5,<3"
+openpyxl = ">=3.1.5,<4"
+seaborn = ">=0.13.2,<0.14"
+matplotlib = ">=3.10.8,<4"
+
+[feature.dev.dependencies]
+ruff = ">=0.14.7,<0.15"
+pandas-stubs = ">=2.3.3.251201,<3"
+scipy-stubs = ">=1.16.3.2,<2"
+types-seaborn = ">=0.13.2.20240417,<0.14"
+ipython = ">=9.7.0,<10"
+
+[environments]
+dev = ["dev", "default"]
