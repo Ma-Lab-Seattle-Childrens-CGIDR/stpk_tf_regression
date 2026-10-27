@@ -1,5 +1,8 @@
 # Modeling Impact of Ser/Thr Phosphorylation on Transcription Factors in _Mtb_
 
+Code associated with "Regulation of _Mycobacterium tuberculosis_ transcriptional
+repressors by Ser/Thr phosphorylation"
+
 <!--toc:start-->
 
 - [Modeling Impact of Ser/Thr Phosphorylation on Transcription Factors in _Mtb_](#modeling-impact-of-serthr-phosphorylation-on-transcription-factors-in-mtb)
@@ -19,9 +22,6 @@
 
 <!--toc:end-->
 
-Code associated with "Regulation of _Mycobacterium tuberculosis_ transcriptional
-repressors by Ser/Thr phosphorylation"
-
 ## Directory Structure
 
 - data: Input data to the analysis
@@ -34,14 +34,21 @@ repressors by Ser/Thr phosphorylation"
     et al., 2014)
 - results: Results of the analysis
   - phosphosite_linear_regression_results.csv: All transcription factor
-    phosphosite predictions
+    phosphorylation impact predictions
   - visualization: Directory of heatmap visualizations of the transcription
-    factor phosphosite activity predictions, named according to the gene name of
-    the transcription factor (or locus tag if no gene name has been assigned)
+    factor phosphorylation activity predictions, named according to the gene
+    name of the transcription factor (or locus tag if no other gene name has
+    been assigned)
 - scripts: Scripts for performing the analysis, and some helper functions
-  - 01_kinase_tf_phosphosite_regression.py: Script for fitting the linear models
+  - 01_kinase_tf_phosphosite_regression.py: Script for fitting linear models to
+    evaluate the impact of changes in phosphorylation on the activity of
+    transcription factors. The targets of the transcription factors are
+    determined from the (Rustad et al., 2014) dataset, and the transcription
+    factor activity is based on the expression of the genes targeted by the
+    transcription factor in the gene expression data from (Frando et al., 2023).
   - 02_kinase_tf_phosphosite_visualization.py: Script for generating the heatmap
-    visualizations for the transcription factor phosphosite activity predictions
+    visualizations for the transcription factor phosphorylation activity
+    predictions.
   - common_functions.py: Some utility functions used by the scripts
 - environment.yml: Conda environment specification
 - LICENSE: License for reusing the code in this repository (does NOT apply to
@@ -53,8 +60,6 @@ repressors by Ser/Thr phosphorylation"
 - requirements.txt: Python requirements file
 - ruff.toml: Configuration for ruff linter
 - uv.lock: UV lockfile
-
-</details>
 
 ## Usage
 
@@ -206,7 +211,10 @@ python 02_kinase_tf_phosphosite_visualization.py
 
 ### Results
 
-Results of the analysis can be found in the 'results/' directory
+Results of the analysis can be found in the 'results/' directory. All of the
+phosphorylation activity predictions are in the
+'phosphosite_linear_regression_results.csv', and the heatmaps visualization
+these activity predictions are in the 'visualization/' subdirectory.
 
 ## Licensing
 
