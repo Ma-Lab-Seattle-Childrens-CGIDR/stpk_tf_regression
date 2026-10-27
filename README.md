@@ -1,7 +1,75 @@
 # Modeling Impact of Ser/Thr Phosphorylation on Transcription Factors in _Mtb_
 
+<!--toc:start-->
+
+- [Modeling Impact of Ser/Thr Phosphorylation on Transcription Factors in _Mtb_](#modeling-impact-of-serthr-phosphorylation-on-transcription-factors-in-mtb)
+  - [Directory Structure](#directory-structure)
+  - [Usage](#usage)
+    - [Downloading External Data](#downloading-external-data)
+    - [Installing Dependencies](#installing-dependencies)
+      - [Conda Environment](#conda-environment)
+      - [Pip](#pip)
+      - [Pixi](#pixi)
+      - [UV](#uv)
+    - [Results](#results)
+  - [Licensing](#licensing)
+  - [References](#references)
+    - [Software](#software)
+    - [Data](#data)
+
+<!--toc:end-->
+
 Code associated with "Regulation of _Mycobacterium tuberculosis_ transcriptional
 repressors by Ser/Thr phosphorylation"
+
+## Directory Structure
+
+<details>
+<summary>Descriptions of the files in this repository</summary>
+<details>
+<summary>data/</summary>
+
+- Mycobacterium_tuberculosis_H37Rv_txt_v5.txt: Gene information for _Mtb_ from
+  [Mycobrowser](https://mycobrowser.epfl.ch/), see [reference](#references)
+  below.
+- bosch_vulnerability_index.xlsx: Gene essentiality and vulnerability
+  information from (Bosch et al., 2021)
+- tfoe_targets.xlsx: Targets of the _Mtb_ transcription factors from (Rustad et
+  al., 2014)
+
+</details>
+<details>
+<summary>results/</summary>
+
+- phosphosite_linear_regression_results.csv: All transcription factor
+  phosphosite predictions
+- visualization: Directory of heatmap visualizations of the transcription factor
+  phosphosite activity predictions, named according to the gene name of the
+  transcription factor (or locus tag if no gene name has been assigned)
+
+</details>
+<details>
+<summary>scripts/</summary>
+
+- 01_kinase_tf_phosphosite_regression.py: Script for fitting the linear models
+- 02_kinase_tf_phosphosite_visualization.py: Script for generating the heatmap
+  visualizations for the transcription factor phosphosite activity predictions
+- common_functions.py: Some utility functions used by the scripts
+
+</details>
+
+- environment.yml: Conda environment specification
+- LICENSE: License for reusing the code in this repository (does NOT apply to
+  external data in data directory, see [licensing](#licensing) for details)
+- README.md: This file
+- pixi.lock: Lock file for pixi project/package manager
+- pixi.toml: Configuration for pixi project/package manager
+- pylock.toml: Python lockfile
+- requirements.txt: Python requirements file
+- ruff.toml: Configuration for ruff linter
+- uv.lock: UV lockfile
+
+</details>
 
 ## Usage
 
@@ -154,40 +222,6 @@ python 02_kinase_tf_phosphosite_visualization.py
 ### Results
 
 Results of the analysis can be found in the 'results/' directory
-
-## Directory Structure
-
-<details>
-<summary>Descriptions of the files in this repository</summary>
-<details>
-<summary>data</summary>
-- Mycobacterium_tuberculosis_H37Rv_txt_v5.txt: Gene information for _Mtb_ from [Mycobrowser](https://mycobrowser.epfl.ch/), see [reference](#references) below.
-- bosch_vulnerability_index.xlsx: Gene essentiality and vulnerability information from (Bosch et al., 2021)
-- tfoe_targets.xlsx: Targets of the _Mtb_ transcription factors from (Rustad et al., 2014)
-</details>
-<details><summary>results</summary>
-- phosphosite_linear_regression_results.csv: All transcription factor phosphosite predictions
-- visualization: Directory of heatmap visualizations of the transcription factor phosphosite activity predictions, named 
-  according to the gene name of the transcription factor (or locus tag if no gene name has been assigned)
-</details>
-<details><summary>scripts</summary>
-- 01_kinase_tf_phosphosite_regression.py: Script for fitting the linear models
-- 02_kinase_tf_phosphosite_visualization.py: Script for generating the heatmap visualizations for the transcription factor phosphosite activity predictions
-- common_functions.py: Some utility functions used by the scripts
-</details>
-
-- environment.yml: Conda environment specification
-- LICENSE: License for reusing the code in this repository (does NOT apply to
-  external data in data directory, see [licensing](#licensing) for details)
-- README.md: This file
-- pixi.lock: Lock file for pixi project/package manager
-- pixi.toml: Configuration for pixi project/package manager
-- pylock.toml: Python lockfile
-- requirements.txt: Python requirements file
-- ruff.toml: Configuration for ruff linter
-- uv.lock: UV lockfile
-
-</details>
 
 ## Licensing
 
