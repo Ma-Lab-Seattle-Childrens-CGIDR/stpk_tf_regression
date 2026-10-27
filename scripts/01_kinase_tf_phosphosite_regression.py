@@ -59,7 +59,7 @@ if not phosphorylation_data_path.exists():
         "doi: https://doi.org/10.1038/s41564-022-01313-7), and place it in the 'data' directory",
         file=sys.stderr,
     )
-    sys.exit()
+    sys.exit(-1)
 
 stpk_diff_expr_data_path = DATA_PATH / "41564_2022_1313_MOESM4_ESM.xlsx"
 if not stpk_diff_expr_data_path.exists():
@@ -74,7 +74,7 @@ if not stpk_diff_expr_data_path.exists():
         "and place it in the 'data' directory",
         file=sys.stderr,
     )
-    sys.exit()
+    sys.exit(-1)
 
 stpk_mutant_gene_expr_data_path = (
     DATA_PATH / "GSE195959_Expression.MTB.GeneData.csv.gz"
@@ -90,7 +90,7 @@ if not stpk_mutant_gene_expr_data_path.exists():
         "GEO GSE195959 at https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE195959",
         file=sys.stderr,
     )
-    sys.exit()
+    sys.exit(-1)
 
 # SECTION: TF Targets
 # Read in the TFOE data to identify genes targeted by
@@ -528,9 +528,7 @@ ols_results["gene_up"] = ols_results["interaction_coef"] > 0.0
 
 # Add information for the differential expression by the kinase conditions
 for kinase in kinase_id_list:
-    diff_gene_df = pd.read_excel(
-        stpk_mutant_gene_expr_data_path, sheet_name=kinase
-    )
+    diff_gene_df = pd.read_excel(stpk_diff_expr_data_path, sheet_name=kinase)
     # First get the OE genes diff
     kinase_gene_diff_oe = diff_gene_df.loc[diff_gene_df["Mutant"] == "OE"]
     kinase_gene_diff_oe = (
