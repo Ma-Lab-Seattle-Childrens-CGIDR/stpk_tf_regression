@@ -478,17 +478,24 @@ for gene in targeted_genes_list:
     )
 ols_results = pd.concat(ols_res_list, axis=0, ignore_index=True)
 logger.info("Finished fitting models, adding additional information")
+# Add a column for TF adjusted FDR p-values
+tf_adj_pval_df_list = []
+for tf, df in ols_results.groupby("TF"):
+    df["interaction_pvalue_tf_adj"] = fdr_with_nan(df["interaction_pvalue"])
+    tf_adj_pval_df_list.append(df)
+ols_results = pd.concat(tf_adj_pval_df_list, axis=0)
+
+# Add a column for phosphosite adjusted FDR p-values
+site_adj_pval_df_list = []
+for site, df in ols_results.groupby("phosphosite"):
+    df["interaction_pvalue_site_adj"] = fdr_with_nan(df["interaction_pvalue"])
+    site_adj_pval_df_list.append(df)
+ols_results = pd.concat(site_adj_pval_df_list, axis=0)
+
 # Add a column for globally adjusted FDR p-values
 ols_results["interaction_pvalue_global_adj"] = fdr_with_nan(
     ols_results["interaction_pvalue"]
 )
-
-# Add a column for a by-TF adjusted p-value
-updated_res_list: list[pd.DataFrame] = []
-for tf, df in ols_results.groupby("TF"):
-    df["interaction_pvalue_tf_fdr"] = fdr_with_nan(df["interaction_pvalue"])
-    updated_res_list.append(df)
-ols_results = pd.concat(updated_res_list, axis=0)
 
 # Add information about which kinases target which phosphosites
 ols_results = pd.merge(
