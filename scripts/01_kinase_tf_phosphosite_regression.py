@@ -22,7 +22,6 @@ from common_functions import (
     find_connected_components,
     rpkm_to_tpm,
 )
-from scipy import stats
 from sklearn.preprocessing import StandardScaler
 
 # Path Setup
@@ -456,11 +455,7 @@ if __name__ == "__main__":
             res_df.loc[int_term, "interaction_coef"] = ols_coefs[int_term]
             res_df.loc[int_term, "interaction_pvalue"] = ols_pvals[int_term]
         # Correct for false discovery rate
-        non_nan_pvals = res_df[~res_df["interaction_pvalue"].isna()]
-        corrected_pvals = pd.Series(
-            stats.false_discovery_control(non_nan_pvals["interaction_pvalue"]),
-            index=non_nan_pvals.index,
-        )
+        corrected_pvals = fdr_with_nan(res_df["interaction_pvalue"])
         res_df.loc[corrected_pvals.index, "interaction_pvalue_adj"] = (
             corrected_pvals
         )
@@ -486,7 +481,7 @@ if __name__ == "__main__":
     for tf, df in ols_results.groupby("TF"):
         df["interaction_pvalue_tf_adj"] = fdr_with_nan(df["interaction_pvalue"])
         tf_adj_pval_df_list.append(df)
-    ols_results = pd.concat(tf_adj_pval_df_list, axis=0)
+    ols_results = pd.concat(tf_adj_pval_df_list, axis=0, ignore_index=True)
 
     # Add a column for phosphosite adjusted FDR p-values
     site_adj_pval_df_list = []
@@ -495,7 +490,7 @@ if __name__ == "__main__":
             df["interaction_pvalue"]
         )
         site_adj_pval_df_list.append(df)
-    ols_results = pd.concat(site_adj_pval_df_list, axis=0)
+    ols_results = pd.concat(site_adj_pval_df_list, axis=0, ignore_index=True)
 
     # Add a column for globally adjusted FDR p-values
     ols_results["interaction_pvalue_global_adj"] = fdr_with_nan(
