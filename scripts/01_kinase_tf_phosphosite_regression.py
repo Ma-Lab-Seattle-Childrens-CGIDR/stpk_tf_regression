@@ -99,7 +99,15 @@ if __name__ == "__main__":
     # fhaA (Rv0020c) and fhaB (Rv0019c) are not well
     # supported as transcriptional regulators,
     # so they will be removed from the TFs
-    columns_to_remove = ["Rv0019c", "Rv0020c"]
+    # Additional columns were based on genes which are now
+    # annotated to be something unrelated to DNA binding or transcriptional
+    # regulation
+    columns_to_remove = [
+        "Rv0019c",
+        "Rv0020c",
+        "Rv2595",
+        "Rv3417c",
+    ]
 
     fc_df = pd.read_excel(
         DATA_PATH / "tfoe_targets.xlsx",
